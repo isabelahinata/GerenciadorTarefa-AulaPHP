@@ -1,30 +1,34 @@
 <?php
+ 
 require_once 'conn.php';
  
-try{
-    if(isset($_GET['id'])){
+try {
+    if (isset($_GET['id'])) {
         $id = $_GET['id'];
  
         $sql = "DELETE FROM crud_php WHERE id = ?";
         $stmt = $conn->prepare($sql);
-       
-        if($stmt) {
+ 
+        if ($stmt) {
             $stmt->bind_param("i", $id);
-            if($stmt->execute()){
-                header("Location: index.php");
+            if ($stmt->execute()) {
+                header("Location: index.pqp");
                 exit();
-            }else {
-                throw new Exception("Erro ao executar a exclusão: " .$stmt->error);
+            } else {
+                throw new Exception("Erro ao executar a exclusão: " . $stmt->error);
             }
+ 
             $stmt->close();
-        }else {
-            throw new Exception("Erro ao preparar a consulta: " .$conn->error);
+        } else {
+            throw new Exception("Erro ao preparar a consulta: " . $conn->error);
         }
-    }else {
+    } else {
         throw new Exception("ID da tarefa não fornecido.");
     }
-}catch(Exception $e){
-    echo "Erro: " . $e->getMessage();
-}finally{
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+} finally {
     $conn->close();
 }
+ 
+ 
