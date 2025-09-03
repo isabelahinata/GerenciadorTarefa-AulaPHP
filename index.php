@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
  
@@ -17,8 +28,12 @@
     <div class="container">
         <nav class="navbar navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="index.php">Crud PHP</a>
-                <form action="login.php" method="$_GET" class="d-inline">
+              <form action="logout.php" method="$GET" class="d-inline">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>  
+            <a class="navbar-brand" href="index.php">Crud PHP</a>
+                <form action="login.php" method="$GET" class="d-inline">
                     <button type="submit" class="btn btn-secondary">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
@@ -72,8 +87,8 @@
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
                                         <td><?php echo $row['title']; ?></td>
-                                        <td><?= substr($row['description'], 0, 20) . '...' ?></td>
-                                        <td><?=date("d/m/Y", strtotime($row['created_at'])) ; ?></td>
+                                        <td><?= substr($row['description'], 0, 20) . '...'  ?></td>
+                                        <td><?=date("d/m/Y", strtotime($row['created_at'])); ?></td>
                                         <td><a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-secondary">
                                                 <i class="fas fa-marker"></i>
                                             </a>
@@ -107,4 +122,5 @@
 </body>
  
 </html>
+ 
  

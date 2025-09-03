@@ -1,5 +1,15 @@
 <?php
  
+session_start();
+ 
+if(!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<?php
+ 
 require_once 'conn.php';
  
 $id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -87,4 +97,3 @@ try {
 </body>
  
 </html>
- 
