@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+if(!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
  
 require_once 'conn.php';
  
@@ -15,6 +21,9 @@ try {
                 $stmt->bind_param("ss", $title, $description);
  
                 if($stmt->execute()) {
+                    session_start();
+                $_SESSION['message'] = "Tarefa criada com sucesso!";
+                $_SESSION['message_type'] = "success";
                     header("Location: index.php");
                     exit();
                 }else {
